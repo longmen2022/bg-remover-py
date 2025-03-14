@@ -10,6 +10,9 @@ COPY requirements.txt .
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install the additional dependency: onnxruntime
+RUN pip install onnxruntime
+
 # Copy the current directory contents into the container at /app
 COPY . .
 
@@ -18,4 +21,3 @@ EXPOSE 5100
 
 # Command to run the Flask application using gunicorn for production
 CMD ["gunicorn", "--bind", "0.0.0.0:5100", "app:app", "--workers=4"]
-
